@@ -9,7 +9,7 @@ VALUES ('Software Engineer', 80000, 2),
        ('HR Manager', 50000, 1);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES (John, Johnson, 1, 3),
-       (Jane, Briggs, 2, 1),
-       (Alice, Hammer, 3, 2);
+VALUES ('John', 'Johnson', 1, NULL),
+       ('Jane', 'Briggs', 2, NULL),
+       ('Alice', 'Hammer', 3, NULL);
        

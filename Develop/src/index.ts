@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import { connectToDb } from './connection.js';
-import dbQueries from './queries.js';
+import dbQueries from './server.js';
 
   await connectToDb();
 
