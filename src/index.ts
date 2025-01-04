@@ -17,6 +17,7 @@ const startApp = async () => {
       'Add Department',
       'Add Role',
       'Add Employee',
+      'Update Employee Role',
       'Update Employee Manager',
       'View Employees by Manager',
       'View Employees by Department',
@@ -32,9 +33,11 @@ const startApp = async () => {
     case 'View All Departments':
       console.table(await dbQueries.getDepartments());
       break;
+
     case 'View All Roles':
       console.table(await dbQueries.getRoles());
       break;
+      
     case 'View All Employees':
       console.table(await dbQueries.getEmployees());
       break;
@@ -102,6 +105,25 @@ const startApp = async () => {
         empAnswers.managerId || null
       );
       console.log('Employee added!');
+      break;
+    case 'Update Employee Role':
+      const updateRoleAnswers = await inquirer.prompt([
+        {
+          type: 'input',
+          name: 'employeeId',
+          message: 'Enter employee ID:',
+        },
+        {
+          type: 'input',
+          name: 'roleId',
+          message: 'Enter new role ID:',
+        },
+      ]);
+      await dbQueries.updateEmployeeRole(
+        updateRoleAnswers.employeeId,
+        updateRoleAnswers.roleId
+      );
+      console.log('Employee role updated!');
       break;
     case 'Update Employee Manager':
       const updateAnswers = await inquirer.prompt([

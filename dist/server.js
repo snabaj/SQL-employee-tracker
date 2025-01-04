@@ -1,6 +1,6 @@
 //import { QueryResult } from 'pg';
-import { pool } from './connection.js';
-
+import { pool, connectToDb } from './connection.js';
+await connectToDb();
 const dbQueries = {
     getDepartments: async () => {
         const res = await pool.query('SELECT * FROM department');

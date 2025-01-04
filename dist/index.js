@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
-import { connectToDb } from './connection.js';
+//import { connectToDb } from './connection.js';
 import dbQueries from './server.js';
-
+//await connectToDb();
 // Define a function that will prompt the user for input
 const startApp = async () => {
     const answer = await inquirer.prompt({
@@ -166,4 +166,5 @@ const startApp = async () => {
     startApp();
 };
 // Initialize application
-connectToDb().then(startApp).catch(console.error);
+startApp();
+//connectToDb().then(startApp).catch(console.error);
