@@ -1,8 +1,8 @@
 import inquirer from 'inquirer';
-import { connectToDb } from './connection.js';
+//import { connectToDb } from './connection.js';
 import dbQueries from './server.js';
 
-  await connectToDb();
+  //await connectToDb();
 
 // Define a function that will prompt the user for input
 const startApp = async () => {
@@ -21,8 +21,6 @@ const startApp = async () => {
       'Update Employee Manager',
       'View Employees by Manager',
       'View Employees by Department',
-      'Delete Department',
-      'Delete Role',
       'Delete Employee',
       'View Department Budget',
       'Exit',
@@ -37,10 +35,11 @@ const startApp = async () => {
     case 'View All Roles':
       console.table(await dbQueries.getRoles());
       break;
-      
+
     case 'View All Employees':
       console.table(await dbQueries.getEmployees());
       break;
+
     case 'Add Department':
       const deptAnswer = await inquirer.prompt({
         type: 'input',
@@ -50,6 +49,7 @@ const startApp = async () => {
       await dbQueries.addDepartment(deptAnswer.name);
       console.log('Department added!');
       break;
+
     case 'Add Role':
       const roleAnswers = await inquirer.prompt([
         {
@@ -75,6 +75,7 @@ const startApp = async () => {
       );
       console.log('Role added!');
       break;
+
     case 'Add Employee':
       const empAnswers = await inquirer.prompt([
         {
@@ -106,6 +107,8 @@ const startApp = async () => {
       );
       console.log('Employee added!');
       break;
+
+    // added 'Update Employee Role' case
     case 'Update Employee Role':
       const updateRoleAnswers = await inquirer.prompt([
         {
@@ -125,6 +128,7 @@ const startApp = async () => {
       );
       console.log('Employee role updated!');
       break;
+
     case 'Update Employee Manager':
       const updateAnswers = await inquirer.prompt([
         {
@@ -144,6 +148,7 @@ const startApp = async () => {
       );
       console.log('Employee manager updated!');
       break;
+
     case 'View Employees by Manager':
       const managerAnswer = await inquirer.prompt({
         type: 'input',
@@ -152,6 +157,7 @@ const startApp = async () => {
       });
       console.table(await dbQueries.viewEmployeesByManager(managerAnswer.managerId));
       break;
+
     case 'View Employees by Department':
       const deptViewAnswer = await inquirer.prompt({
         type: 'input',
@@ -162,24 +168,7 @@ const startApp = async () => {
         await dbQueries.viewEmployeesByDepartment(deptViewAnswer.departmentId)
       );
       break;
-    case 'Delete Department':
-      const delDeptAnswer = await inquirer.prompt({
-        type: 'input',
-        name: 'id',
-        message: 'Enter department ID to delete:',
-      });
-      await dbQueries.deleteDepartment(delDeptAnswer.id);
-      console.log('Department deleted!');
-      break;
-    case 'Delete Role':
-      const delRoleAnswer = await inquirer.prompt({
-        type: 'input',
-        name: 'id',
-        message: 'Enter role ID to delete:',
-      });
-      await dbQueries.deleteRole(delRoleAnswer.id);
-      console.log('Role deleted!');
-      break;
+
     case 'Delete Employee':
       const delEmpAnswer = await inquirer.prompt({
         type: 'input',
@@ -189,6 +178,7 @@ const startApp = async () => {
       await dbQueries.deleteEmployee(delEmpAnswer.id);
       console.log('Employee deleted!');
       break;
+
     case 'View Department Budget':
       const budgetAnswer = await inquirer.prompt({
         type: 'input',
@@ -205,8 +195,8 @@ const startApp = async () => {
 
   startApp();
 };
-
+startApp();
 // Initialize application
-connectToDb().then(startApp).catch(console.error);
+//connectToDb().then(startApp).catch(console.error);
 
 

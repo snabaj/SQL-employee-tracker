@@ -15,11 +15,10 @@ const startApp = async () => {
             'Add Department',
             'Add Role',
             'Add Employee',
+            'Update Employee Role',
             'Update Employee Manager',
             'View Employees by Manager',
             'View Employees by Department',
-            'Delete Department',
-            'Delete Role',
             'Delete Employee',
             'View Department Budget',
             'Exit',
@@ -91,6 +90,23 @@ const startApp = async () => {
             await dbQueries.addEmployee(empAnswers.firstName, empAnswers.lastName, empAnswers.roleId, empAnswers.managerId || null);
             console.log('Employee added!');
             break;
+        // added 'Update Employee Role' case
+        case 'Update Employee Role':
+            const updateRoleAnswers = await inquirer.prompt([
+                {
+                    type: 'input',
+                    name: 'employeeId',
+                    message: 'Enter employee ID:',
+                },
+                {
+                    type: 'input',
+                    name: 'roleId',
+                    message: 'Enter new role ID:',
+                },
+            ]);
+            await dbQueries.updateEmployeeRole(updateRoleAnswers.employeeId, updateRoleAnswers.roleId);
+            console.log('Employee role updated!');
+            break;
         case 'Update Employee Manager':
             const updateAnswers = await inquirer.prompt([
                 {
@@ -123,24 +139,6 @@ const startApp = async () => {
             });
             console.table(await dbQueries.viewEmployeesByDepartment(deptViewAnswer.departmentId));
             break;
-        case 'Delete Department':
-            const delDeptAnswer = await inquirer.prompt({
-                type: 'input',
-                name: 'id',
-                message: 'Enter department ID to delete:',
-            });
-            await dbQueries.deleteDepartment(delDeptAnswer.id);
-            console.log('Department deleted!');
-            break;
-        case 'Delete Role':
-            const delRoleAnswer = await inquirer.prompt({
-                type: 'input',
-                name: 'id',
-                message: 'Enter role ID to delete:',
-            });
-            await dbQueries.deleteRole(delRoleAnswer.id);
-            console.log('Role deleted!');
-            break;
         case 'Delete Employee':
             const delEmpAnswer = await inquirer.prompt({
                 type: 'input',
@@ -165,6 +163,6 @@ const startApp = async () => {
     }
     startApp();
 };
-// Initialize application
 startApp();
+// Initialize application
 //connectToDb().then(startApp).catch(console.error);

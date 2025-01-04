@@ -23,6 +23,9 @@ const dbQueries = {
     addEmployee: async (firstName, lastName, roleId, managerId) => {
         await pool.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)', [firstName, lastName, roleId, managerId]);
     },
+    updateEmployeeRole: async (employeeId, roleId) => {
+        await pool.query('UPDATE employee SET role_id = $1 WHERE id = $2', [roleId, employeeId]);
+    },
     updateEmployeeManager: async (employeeId, managerId) => {
         await pool.query('UPDATE employee SET manager_id = $1 WHERE id = $2', [managerId, employeeId]);
     },
@@ -35,12 +38,6 @@ const dbQueries = {
          JOIN role r ON e.role_id = r.id 
          WHERE r.department_id = $1`, [departmentId]);
         return res.rows;
-    },
-    deleteDepartment: async (id) => {
-        await pool.query('DELETE FROM department WHERE id = $1', [id]);
-    },
-    deleteRole: async (id) => {
-        await pool.query('DELETE FROM role WHERE id = $1', [id]);
     },
     deleteEmployee: async (id) => {
         await pool.query('DELETE FROM employee WHERE id = $1', [id]);

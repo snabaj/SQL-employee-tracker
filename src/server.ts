@@ -3,8 +3,6 @@ import { pool, connectToDb } from './connection.js';
 
 await connectToDb();
 
-
-
 const dbQueries = {
     getDepartments: async () => {
       const res = await pool.query('SELECT * FROM department');
@@ -33,6 +31,12 @@ const dbQueries = {
         [firstName, lastName, roleId, managerId]
       );
     },
+    updateEmployeeRole: async (employeeId: number, roleId: number) => {
+      await pool.query(
+        'UPDATE employee SET role_id = $1 WHERE id = $2',
+        [roleId, employeeId]
+      );
+    },
     updateEmployeeManager: async (employeeId: number, managerId: number) => {
       await pool.query(
         'UPDATE employee SET manager_id = $1 WHERE id = $2',
@@ -54,12 +58,6 @@ const dbQueries = {
         [departmentId]
       );
       return res.rows;
-    },
-    deleteDepartment: async (id: number) => {
-      await pool.query('DELETE FROM department WHERE id = $1', [id]);
-    },
-    deleteRole: async (id: number) => {
-      await pool.query('DELETE FROM role WHERE id = $1', [id]);
     },
     deleteEmployee: async (id: number) => {
       await pool.query('DELETE FROM employee WHERE id = $1', [id]);
