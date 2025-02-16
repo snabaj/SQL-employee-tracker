@@ -21,7 +21,10 @@ Install Inquirer Package.
 
 The user starts the application by using the command “npm start” in the terminal. A menu appears with a list of selections where the user can choose an action to perform. When they choose an action, a table containing the results displays for some selections. The menu is displayed after each action until they choose to exit the app.
 
-Below is a walkthrough video link demonstrating the functionality of the application.
+## Screenshot of application functionality.
+![Application screenshot](employee-track.png)
+
+## Walkthrough video link demonstrating the functionality of the application.
 https://drive.google.com/file/d/1eqGCgxw-uTBpamuNhoREr1FEvkaE3mFY/view
 
 ## License
